@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "lodash": "^4.16.2",
+    "moment": "^2.15.1",
+    "moment-timezone": "^0.5.5"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop": "pm2 kill",
+    "start": "pm2 start process.json && pm2 logs"
   },
   "repository": {
     "type": "git",
@@ -15,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/Shift3/node-vagrant/issues"
   },
-  "homepage": "https://github.com/Shift3/node-vagrant#readme",
-  "dependencies": {
-    "lodash": "^4.15.0"
-  }
+  "homepage": "https://github.com/Shift3/node-vagrant#readme"
 }
