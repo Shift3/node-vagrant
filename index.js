@@ -12,10 +12,24 @@ const handlers = require('./handlers'),
     fs.exists(filepath, exists => {
       if (!exists) {
         if (handlers[method] && typeof handlers[method][request.url] === 'function') {
-          return handlers[method][request.url](request, response);
+          if (method === 'post') {
+            let data = '';
+
+            request.on('data', chunk => {
+              data += chunk.toString();
+            });
+
+            request.on('end', () => {
+              data = JSON.parse(data);
+              request.body = data;
+              handlers[method][request.url](request, response);
+            });
+          } else {
+            return handlers[method][request.url](request, response);
+          }
+        } else {
+          response.end('That is a 404');
         }
-        
-        response.end('That is a 404');
       } else {
         fs.readFile(filepath, (err, file) => {
           if (err) return response.end('Could not read the file');

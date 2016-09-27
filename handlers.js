@@ -1,4 +1,5 @@
-const moment = require('moment-timezone');
+const moment = require('moment-timezone'),
+  storage = require('./storage');
 
 module.exports = {
   /**
@@ -9,7 +10,7 @@ module.exports = {
     '/dateNow': (request, response) => {
       let now = moment().tz("America/Los_Angeles"),
         format = now.format('dddd, MMMM Do YYYY, h:mm:ss a');
-      
+
       response.end(format);
     }
   },
@@ -23,7 +24,16 @@ module.exports = {
     },
 
     '/dateNow': (request, response) => {
-      response.end('POST /dateNow');
+      response.end(`Hello ${request.body.name}, the date now is: ${moment().format('YYYY-MM-DD')}`);
+    },
+
+    '/store': (request, response) => {
+      for (var key in request.body) {
+        if (request.body.hasOwnProperty(key)) {
+          storage.set(key, request.body[key]);
+        }
+      }
+      response.end('check the logs');
     }
   }
 };
