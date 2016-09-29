@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "name": "Bugs Bunny",
+      "age": 412,
+      "email": "bugs@bunny.com",
+      "password": "1234"
+    },
+    {
+      "name": "Daffy Duck",
+      "age": 17,
+      "email": "daffy@duck.com",
+      "password": "1234"
+    },
+    {
+      "name": "Elmer Fudd",
+      "age": 40,
+      "email": "elmer@fudd.com",
+      "password": "1234"
+    },
+    {
+      "name": "Yosemite Sam",
+      "age": 42,
+      "email": "yosemite@sam.com",
+      "password": "1234"
+    }
+  ]
+}
