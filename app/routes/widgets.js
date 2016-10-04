@@ -34,11 +34,35 @@ router.get('/', (req, res, next) => {
   res.json(widgets);
 });
 
+router.post('/', (req, res, next) => {
+  widgets.push(req.body);
+  res.json(widgets);
+});
+
 router.get('/:widgetId', (req, res, next) => {
   let id = req.params.widgetId,
     widget = _.find(widgets, {id});
-  
+
+  if (!widget) {
+    res.status(404);
+    res.send('Could not find your widget...Sorry.');
+  } else {
+    res.json(widget);
+  }
+});
+
+router.patch('/:widgetId', (req, res, next) => {
+  let id = req.params.widgetId,
+    widget = _.find(widgets, {id});
+
+  _.merge(widget, req.body);
+
   res.json(widget);
+});
+
+router.delete('/:widgetId', (req, res, next) => {
+  _.remove(widgets, {id: req.params.widgetId});
+  res.json(widgets);
 });
 
 module.exports = router;
