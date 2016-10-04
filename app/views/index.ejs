@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet'
+          href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<p>You are in <%= course %></p>
+
+<ul>
+    <% for (var i = 0; i < subjects.length; i++) { %>
+    <li class="foo"><%= subjects[i] %></li>
+    <% } %>
+</ul>
+
+</body>
+</html>
