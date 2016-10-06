@@ -34,10 +34,24 @@ router.get('/', (req, res, next) => {
   res.json(widgets);
 });
 
-router.post('/', (req, res, next) => {
+function validateWidget(req, res, next) {
+  //Do validation here
+  if (!req.body.color || !req.body.size || !req.body.prongs) {
+    var error = new Error('Your widget is lacking required fields');
+    error.status = 409;
+    
+    next(error);
+  } else {
+    next(); 
+  }
+}
+
+function postWidget(req, res, next) {
   widgets.push(req.body);
   res.json(widgets);
-});
+}
+
+router.post('/', validateWidget, postWidget);
 
 router.get('/:widgetId', (req, res, next) => {
   let id = req.params.widgetId,
