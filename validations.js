@@ -25,6 +25,7 @@ let UserSchema = new mongoose.Schema({
   lastName: {type: String, required: true},
   email: {
     type: String,
+    unique: true,
     required: true,
     validate: {
       validator: (value) => {
@@ -47,6 +48,11 @@ let UserSchema = new mongoose.Schema({
     }
   }
 });
+
+UserSchema.methods.addYears = function (years) {
+  return this.age + years;
+};
+
 let User = mongoose.model('User', UserSchema);
 
 let greg = new User({
@@ -59,7 +65,7 @@ let greg = new User({
 
 greg.save()
   .then(() => {
-    console.log(greg);
+    console.log(greg.addYears(10));
   })
   .catch(err => {
     console.log('ERROR: ', err);
